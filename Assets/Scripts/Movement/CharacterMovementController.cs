@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace War.io
+namespace War.io.Movement
 {
     [RequireComponent(typeof(CharacterController))]
     public class CharacterMovementController : MonoBehaviour
