@@ -451,6 +451,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4142753577912571198, guid: efcf4f45275666c41a38ffdee3e4888e, type: 3}
+      propertyPath: _health
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142753577912571198, guid: efcf4f45275666c41a38ffdee3e4888e, type: 3}
       propertyPath: _baseWeaponPrefab
       value: 
       objectReference: {fileID: -135733268454994750, guid: 98321474f509e04408b2452d3dbc7708, type: 3}
