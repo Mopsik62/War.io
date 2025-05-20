@@ -66,7 +66,7 @@ namespace War.io
             }
             else if (LayerUtils.IsPickUp(other.gameObject))
             {
-                var pickUp = other.gameObject.GetComponent<PickUpWeapon>();
+                var pickUp = other.gameObject.GetComponent<PickUpItem>();
                 pickUp.PickUp(this);
 
                 Destroy(other.gameObject);
