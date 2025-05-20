@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace War.io.Movement
 {
@@ -61,6 +62,20 @@ namespace War.io.Movement
 
                 transform .rotation = newRotation;
             }
+        }
+        public void Accelerate(float multiplier, float duration)
+        {
+            StartCoroutine(AccelerateCoroutine(multiplier, duration));
+        }
+
+        private IEnumerator AccelerateCoroutine(float multiplier, float duration)
+        {
+            float originalSpeed = _speed;
+            _speed *= multiplier;
+
+            yield return new WaitForSeconds(duration);
+
+            _speed = originalSpeed;
         }
     }
 }

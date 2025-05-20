@@ -1,11 +1,12 @@
 using UnityEngine;
 using War.io.Movement;
+using War.io.PickUp;
 using War.io.Shooting;
 
 namespace War.io
 {
     [RequireComponent(typeof(CharacterMovementController), typeof(ShootingController))]
-    public class BaseCharacter : MonoBehaviour
+    public abstract class BaseCharacter : MonoBehaviour
     {
         [SerializeField]
         private Weapon _baseWeaponPrefab;
@@ -33,7 +34,7 @@ namespace War.io
 
         protected void Start()
         {
-            _shootingController.SetWeapon(_baseWeaponPrefab, _hand);
+            SetWeapon(_baseWeaponPrefab);
         }
 
         // Update is called once per frame
@@ -63,6 +64,18 @@ namespace War.io
 
                 Destroy(other.gameObject);
             }
+            else if (LayerUtils.IsPickUp(other.gameObject))
+            {
+                var pickUp = other.gameObject.GetComponent<PickUpItem>();
+                pickUp.PickUp(this);
+
+                Destroy(other.gameObject);
+            }
+        }
+
+        public void SetWeapon(Weapon weapon)
+        {
+            _shootingController.SetWeapon(weapon, _hand);
         }
     }
 }
