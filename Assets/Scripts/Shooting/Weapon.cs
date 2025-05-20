@@ -15,6 +15,9 @@ namespace War.io.Shooting
         public float ShootFrequencySex { get; private set; } = 1f;
 
         [SerializeField]
+        private float _damage = 1f;
+
+        [SerializeField]
         private float _bulletMaxFlyDistance = 10f;
 
         [SerializeField]
@@ -30,7 +33,7 @@ namespace War.io.Shooting
             var target = targetPoint - _bulletSpawnPosition.position;
             target.y = 0;
             target.Normalize();
-            bullet.Initialize(target, _bulletMaxFlyDistance, _bulletFlySpeed);
+            bullet.Initialize(target, _bulletMaxFlyDistance, _bulletFlySpeed, _damage);
 
         }
     }

@@ -10,7 +10,9 @@ namespace War.io.Movement
         private float _speed = 1f;
         [SerializeField]
         private float _maxRadiansDelta = 10f;
-        public Vector3 Direction { get;  set; }
+        public Vector3 MovementDirection { get;  set; }
+
+        public Vector3 LookDirection { get; set; }
 
         private CharacterController _characterController;
         protected void Awake()
@@ -22,7 +24,7 @@ namespace War.io.Movement
         {
             Translate();
 
-            if(_maxRadiansDelta > 0f && Direction != Vector3.zero)
+            if(_maxRadiansDelta > 0f && LookDirection != Vector3.zero)
             {
                 Rotate();
             }
@@ -30,20 +32,20 @@ namespace War.io.Movement
 
         private void Translate()
         {
-            var delta = Direction * _speed * Time.deltaTime;
+            var delta = MovementDirection * _speed * Time.deltaTime;
             _characterController.Move(delta);
         }
         
         private void Rotate()
         {
             var currentLookDirection = transform.rotation * Vector3.forward;
-            float sqrMagnitude = (currentLookDirection - Direction).sqrMagnitude;
+            float sqrMagnitude = (currentLookDirection - LookDirection).sqrMagnitude;
 
            if (sqrMagnitude> SqrEpsilon)
             {
                 var newRotation = Quaternion.Slerp(
                     transform.rotation,
-                    Quaternion.LookRotation(Direction, Vector3.up),
+                    Quaternion.LookRotation(LookDirection, Vector3.up),
                     _maxRadiansDelta * Time.deltaTime);
 
                 transform .rotation = newRotation;
