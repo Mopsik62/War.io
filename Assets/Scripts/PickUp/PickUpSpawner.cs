@@ -14,21 +14,34 @@ namespace War.io.PickUp
         [SerializeField]
         private int _maxCount = 2;
 
+        /*        [SerializeField]
+                private float _spawnIntervalSeconds = 10f;*/
+
         [SerializeField]
-        private float _spawnIntervalSeconds = 10f;
+        private float _spawnIntervalMinSeconds = 2f;
+        [SerializeField]
+        private float _spawnIntervalMaxSeconds = 10f;
+        [SerializeField]
+        private float _spawnIntervalSeconds;
 
         private float _currentSpawnTimerSeconds;
 
-        private int _currentCount;
 
+        private int _currentCount;
+        protected void Start()
+        {
+            _spawnIntervalSeconds = GetRandomInterval(_spawnIntervalMinSeconds, _spawnIntervalMaxSeconds);
+        }
         protected void Update()
         {
             if (_currentCount < _maxCount)
             {
                 _currentSpawnTimerSeconds += Time.deltaTime;
+
                 if (_currentSpawnTimerSeconds > _spawnIntervalSeconds)
                 {
                     _currentSpawnTimerSeconds = 0f;
+                    _spawnIntervalSeconds = GetRandomInterval(_spawnIntervalMinSeconds, _spawnIntervalMaxSeconds);
                     _currentCount++;
 
                     var randomPointInsideRange = Random.insideUnitCircle * _range;
@@ -52,6 +65,11 @@ namespace War.io.PickUp
             Handles.color = Color.green;
             Handles.DrawWireDisc(transform.position, Vector3.up, _range);
             Handles.color = cashedColor;
+        }
+        protected float GetRandomInterval(float min, float max)
+        {
+            float value = Random.Range(min, max);
+            return value;
         }
 
 
