@@ -12,7 +12,7 @@ namespace War.io.Shooting
         public float ShootRadius { get; private set; } = 5f;
 
         [field: SerializeField]
-        public float ShootFrequencySex { get; private set; } = 1f;
+        public float ShootFrequencySec { get; private set; } = 1f;
 
         [SerializeField]
         private float _damage = 1f;

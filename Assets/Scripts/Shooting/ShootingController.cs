@@ -24,7 +24,7 @@ namespace War.io.Shooting
                 if (HasTarget)
                     _weapon.Shoot(TargetPosition);
 
-                _nextShotTimerSec = _weapon.ShootFrequencySex;
+                _nextShotTimerSec = _weapon.ShootFrequencySec;
             }
         }
 
