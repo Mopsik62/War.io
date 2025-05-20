@@ -10,6 +10,9 @@ namespace War.io.Movement
         private float _speed = 1f;
         [SerializeField]
         private float _maxRadiansDelta = 10f;
+
+        [SerializeField]
+        private float _haste = 2f;
         public Vector3 MovementDirection { get;  set; }
 
         public Vector3 LookDirection { get; set; }
@@ -32,7 +35,15 @@ namespace War.io.Movement
 
         private void Translate()
         {
-            var delta = MovementDirection * _speed * Time.deltaTime;
+            Vector3 delta;
+            if (Input.GetKey(KeyCode.Space))
+            {
+                 delta = MovementDirection * _speed * _haste * Time.deltaTime;
+            }
+            else
+            {
+                 delta = MovementDirection * _speed * Time.deltaTime;
+            }
             _characterController.Move(delta);
         }
         
