@@ -1,5 +1,6 @@
 using UnityEngine;
 using War.io.Movement;
+using War.io.PickUp;
 using War.io.Shooting;
 
 namespace War.io
@@ -60,6 +61,13 @@ namespace War.io
                 var bullet = other.gameObject.GetComponent<Bullet>();
 
                 _health -= bullet.Damage;
+
+                Destroy(other.gameObject);
+            }
+            else if (LayerUtils.IsPickUp(other.gameObject))
+            {
+                var pickUp = other.gameObject.GetComponent<PickUpWeapon>();
+                _shootingController.SetWeapon(pickUp.WeaponPrefab, _hand);
 
                 Destroy(other.gameObject);
             }
