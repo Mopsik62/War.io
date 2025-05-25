@@ -1,9 +1,8 @@
 using UnityEngine;
-using War.io.Movement;
 
-namespace War.io
+namespace War.io.Enemy
 {
-    [RequireComponent(typeof(DummyDirectionController))]
+    [RequireComponent(typeof(EnemyDirectionController), typeof(EnemyAiController))]
     public class EnemyCharacter : BaseCharacter
     {
 
