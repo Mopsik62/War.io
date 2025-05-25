@@ -15,7 +15,6 @@ namespace War.io.FSM
             _states = new List<BaseState>();
             _transitions = new Dictionary<BaseState, List<Transition>>();
         }
-
         public void SetInitialState(BaseState state)
         {
             _currentState = state;

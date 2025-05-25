@@ -12,10 +12,15 @@ namespace War.io.Camera
         [SerializeField]
         public PlayerCharacter _player;
 
+        public void SetPlayer(PlayerCharacter player)
+        {
+            _player = player;
+        }
+
         protected void Awake()
         {
-            if (_player == null)
-                throw new NullReferenceException($"Follow camera can't follow null player - {nameof(_player)}!");
+           // if (_player == null)
+             //   throw new NullReferenceException($"Follow camera can't follow null player - {nameof(_player)}!");
 
         }
 
@@ -27,6 +32,10 @@ namespace War.io.Camera
 
                 transform.position = _player.transform.position + _followCameraOffset;
                 transform.rotation = Quaternion.LookRotation(targetRotation, Vector3.up);
+            }
+            else
+            {
+                return;
             }
 
         }

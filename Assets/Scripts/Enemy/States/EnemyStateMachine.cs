@@ -23,7 +23,7 @@ namespace War.io.Enemy.States
                     () => target.DistanceToClosestFromAgent() > NavMeshTurnOffDistance),
                 new Transition(
                     moveForwardState,
-                    () => target.DistanceToClosestFromAgent() <= NavMeshTurnOffDistance),
+                    () => target.DistanceToClosestFromAgent() < NavMeshTurnOffDistance && target.DistanceToClosestFromAgent() != 0),
                 new Transition(
                     runAwayState,
                     () => enemy.RunAway())
