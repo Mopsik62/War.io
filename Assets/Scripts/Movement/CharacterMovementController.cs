@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using War.io.Enemy;
 
 namespace War.io.Movement
 {
@@ -13,15 +14,22 @@ namespace War.io.Movement
         private float _maxRadiansDelta = 10f;
 
         [SerializeField]
+        private float _runAwayBoost = 0.1f;
+
+
+        [SerializeField]
         private float _haste = 2f;
         public Vector3 MovementDirection { get;  set; }
 
         public Vector3 LookDirection { get; set; }
 
         private CharacterController _characterController;
+        private EnemyCharacter _character;
+
         protected void Awake()
         {
-            _characterController=GetComponent<CharacterController>();
+            TryGetComponent(out _character);
+            _characterController =GetComponent<CharacterController>();
         }   
 
         protected void Update()
@@ -37,14 +45,22 @@ namespace War.io.Movement
         private void Translate()
         {
             Vector3 delta;
+            float curSpeed = _speed;
+            if (_character != null)
+            {
+                if (_character.RunAwayBool)
+                curSpeed += _runAwayBoost;
+            }
+
             if (Input.GetKey(KeyCode.Space))
             {
-                 delta = MovementDirection * _speed * _haste * Time.deltaTime;
+                 delta = MovementDirection * curSpeed * _haste * Time.deltaTime;
             }
             else
             {
-                 delta = MovementDirection * _speed * Time.deltaTime;
+                 delta = MovementDirection * curSpeed * Time.deltaTime;
             }
+
             _characterController.Move(delta);
         }
         
@@ -77,5 +93,6 @@ namespace War.io.Movement
 
             _speed = originalSpeed;
         }
+
     }
 }

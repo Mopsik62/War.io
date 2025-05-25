@@ -245,6 +245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 1
   _maxRadiansDelta: 10
+  _runAwayBoost: 0.1
   _haste: 2
 --- !u!114 &5635924938209060578
 MonoBehaviour:
@@ -276,6 +277,7 @@ MonoBehaviour:
   _health: 10
   lowHealthThreshold: 0.3
   runAwayProbability: 0.7
+  RunAwayBool: 0
 --- !u!114 &8091012673662401158
 MonoBehaviour:
   m_ObjectHideFlags: 0
