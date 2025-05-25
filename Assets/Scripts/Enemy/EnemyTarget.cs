@@ -10,6 +10,7 @@ namespace War.io.Enemy
         private readonly Transform _agentTransform;
         private readonly PlayerCharacter _player;
 
+        
         private readonly Collider[] _colliders = new Collider[10];
         public EnemyTarget(Transform agent, PlayerCharacter player, float viewRadius)
         {

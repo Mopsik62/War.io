@@ -15,10 +15,11 @@ namespace War.io.Enemy
         {
             var player = FindObjectOfType<PlayerCharacter>();
             var enemyDirectionController = GetComponent<EnemyDirectionController>();
+            var enemy = GetComponent<EnemyCharacter>();
 
             var navMesher = new NavMesher(transform);
             _target = new EnemyTarget(transform, player, _viewRadius);
-            _stateMachine = new EnemyStateMachine(enemyDirectionController, navMesher, _target);
+            _stateMachine = new EnemyStateMachine(enemyDirectionController, navMesher, _target, enemy);
         }
 
         protected void Update()
