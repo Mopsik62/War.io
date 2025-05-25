@@ -15,7 +15,11 @@ namespace War.io
         private Transform _hand;
 
         [SerializeField]
-        private float _health = 2f; 
+        protected float _maxHealth = 2f;
+
+        [SerializeField]
+        protected float _health = 2f;
+
 
         private IMovementDirectionSource _movementDirectionSource;
 
@@ -26,6 +30,7 @@ namespace War.io
 
         protected void Awake()
         {
+            _health = _maxHealth;
             _movementDirectionSource = GetComponent<IMovementDirectionSource>();
 
             _characterMovementController = GetComponent<CharacterMovementController>();
@@ -76,6 +81,11 @@ namespace War.io
         public void SetWeapon(Weapon weapon)
         {
             _shootingController.SetWeapon(weapon, _hand);
+        }
+        public string GetWeaponType()
+        {
+            //Debug.Log(_baseWeaponPrefab.name);
+            return _baseWeaponPrefab.name;
         }
     }
 }

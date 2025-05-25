@@ -44,7 +44,7 @@ namespace War.io.Shooting
             GameObject target = null;
             var position = _weapon.transform.position;
             var radius = _weapon.ShootRadius;
-            var mask = LayerUtils.EnemyMask;
+            var mask = LayerUtils.CharactersMask;
 
             var size = Physics.OverlapSphereNonAlloc(position, radius, _colliders, mask);
             if (size > 0)
@@ -59,6 +59,11 @@ namespace War.io.Shooting
                 }
             }
             return target;
+        }
+
+        public string GetWeaponType()
+        {
+            return _weapon.name;
         }
     }
 }
