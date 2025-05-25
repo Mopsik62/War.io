@@ -84,6 +84,7 @@ namespace War.io
         }
         public string GetWeaponType()
         {
+            //Debug.Log(_baseWeaponPrefab.name);
             return _baseWeaponPrefab.name;
         }
     }

@@ -187,7 +187,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _baseWeaponPrefab: {fileID: -135733268454994750, guid: 98321474f509e04408b2452d3dbc7708, type: 3}
   _hand: {fileID: 5442648208178457571}
-  _health: 5
+  _maxHealth: 100
+  _health: 100
 --- !u!114 &8364832345640168470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,6 +215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 3
   _maxRadiansDelta: 10
+  _runAwayBoost: 5
   _haste: 2
 --- !u!143 &2838931030304740509
 CharacterController:

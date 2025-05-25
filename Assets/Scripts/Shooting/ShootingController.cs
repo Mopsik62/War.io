@@ -60,5 +60,10 @@ namespace War.io.Shooting
             }
             return target;
         }
+
+        public string GetWeaponType()
+        {
+            return _weapon.name;
+        }
     }
 }
