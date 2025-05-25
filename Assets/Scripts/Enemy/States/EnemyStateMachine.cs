@@ -26,7 +26,7 @@ namespace War.io.Enemy.States
                     () => target.DistanceToClosestFromAgent() <= NavMeshTurnOffDistance),
                 new Transition(
                     runAwayState,
-                    () => enemy.RunAway)
+                    () => enemy.RunAway())
             }
             );
 
@@ -51,7 +51,7 @@ namespace War.io.Enemy.States
                     () => target.DistanceToClosestFromAgent() > NavMeshTurnOffDistance),
                 new Transition(
                     runAwayState,
-                    () => enemy.RunAway)
+                    () => enemy.RunAway())
             }
             );
 

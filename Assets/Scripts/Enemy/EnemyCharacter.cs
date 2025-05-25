@@ -10,6 +10,11 @@ namespace War.io.Enemy
         [SerializeField]
         [Range(0f, 1f)] private float runAwayProbability = 0.7f;
 
-        public bool RunAway => (_health / _maxHealth) < lowHealthThreshold && UnityEngine.Random.value < runAwayProbability;
-    }
+        public bool RunAway()
+        {
+                return (_health / _maxHealth) < lowHealthThreshold && UnityEngine.Random.value<runAwayProbability;
+
+        }
+
+}
 }
