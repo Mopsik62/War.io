@@ -82,10 +82,6 @@ namespace War.io
         {
             _shootingController.SetWeapon(weapon, _hand);
         }
-        public string GetWeaponType()
-        {
-            //Debug.Log(_baseWeaponPrefab.name);
-            return _baseWeaponPrefab.name;
-        }
+
     }
 }
