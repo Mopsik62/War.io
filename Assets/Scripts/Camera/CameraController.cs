@@ -19,8 +19,9 @@ namespace War.io.Camera
 
         protected void Awake()
         {
-           // if (_player == null)
-             //   throw new NullReferenceException($"Follow camera can't follow null player - {nameof(_player)}!");
+            if (_player == null)
+                throw new NullReferenceException($"Follow camera can't follow null player - {nameof(_player)}!");
+
 
         }
 

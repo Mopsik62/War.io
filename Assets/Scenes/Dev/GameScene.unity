@@ -393,7 +393,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _followCameraOffset: {x: -10, y: 8, z: 0}
   _rotationOffset: {x: -4.5, y: 3, z: 0}
-  _player: {fileID: 0}
+  _player: {fileID: 4142753577912571198, guid: efcf4f45275666c41a38ffdee3e4888e, type: 3}
 --- !u!1 &1049661198
 GameObject:
   m_ObjectHideFlags: 0
