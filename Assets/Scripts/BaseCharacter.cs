@@ -15,6 +15,9 @@ namespace War.io
         private Transform _hand;
 
         [SerializeField]
+        private Animator _animator;
+
+        [SerializeField]
         protected float _maxHealth = 2f;
 
         [SerializeField]
@@ -42,7 +45,6 @@ namespace War.io
             SetWeapon(_baseWeaponPrefab);
         }
 
-        // Update is called once per frame
         protected void Update()
         {
             var direction = _movementDirectionSource.MovementDirection;
@@ -54,6 +56,10 @@ namespace War.io
             }
             _characterMovementController.MovementDirection = direction;
             _characterMovementController.LookDirection = lookDirection;
+
+            _animator.SetBool("IsMoving", direction != Vector3.zero);
+            _animator.SetBool("IsShooting", _shootingController.HasTarget);
+
 
             if (_health <= 0f)
                 Destroy(gameObject);
