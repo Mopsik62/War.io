@@ -11,11 +11,14 @@ namespace War.io.Enemy
         private EnemyTarget _target;
         private EnemyStateMachine _stateMachine;
 
+        private EnemyCharacter enemy;
+
         protected void Awake()
         {
             var player = FindObjectOfType<PlayerCharacter>();
             var enemyDirectionController = GetComponent<EnemyDirectionController>();
-            var enemy = GetComponent<EnemyCharacter>();
+            enemy = GetComponent<EnemyCharacter>();
+
 
             var navMesher = new NavMesher(transform);
             _target = new EnemyTarget(transform, player, _viewRadius);

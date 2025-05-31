@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using War.io.Movement;
 using War.io.PickUp;
@@ -15,11 +16,15 @@ namespace War.io
         private Transform _hand;
 
         [SerializeField]
+        private Animator _animator;
+
+        [SerializeField]
         protected float _maxHealth = 2f;
 
         [SerializeField]
         protected float _health = 2f;
 
+        public bool _isDeath = false;
 
         private IMovementDirectionSource _movementDirectionSource;
 
@@ -42,9 +47,9 @@ namespace War.io
             SetWeapon(_baseWeaponPrefab);
         }
 
-        // Update is called once per frame
         protected void Update()
         {
+            if (_isDeath) return;
             var direction = _movementDirectionSource.MovementDirection;
             var lookDirection = direction;
             if (_shootingController.HasTarget)
@@ -55,8 +60,12 @@ namespace War.io
             _characterMovementController.MovementDirection = direction;
             _characterMovementController.LookDirection = lookDirection;
 
+            _animator.SetBool("IsMoving", direction != Vector3.zero);
+            _animator.SetBool("IsShooting", _shootingController.HasTarget);
+
+
             if (_health <= 0f)
-                Destroy(gameObject);
+                Death();
         }
 
         protected void OnTriggerEnter(Collider other)
@@ -82,10 +91,36 @@ namespace War.io
         {
             _shootingController.SetWeapon(weapon, _hand);
         }
-        public string GetWeaponType()
+
+        public void Death()
         {
-            //Debug.Log(_baseWeaponPrefab.name);
-            return _baseWeaponPrefab.name;
+            StartCoroutine(DeathCoroutine());
         }
+
+        private IEnumerator DeathCoroutine()
+        {
+
+                gameObject.layer = LayerMask.NameToLayer("Dead");
+
+                _isDeath = true;
+
+                _animator.SetTrigger("Death");
+
+                yield return null;
+
+                AnimatorStateInfo state;
+                do
+                {
+                    yield return null;
+                    state = _animator.GetCurrentAnimatorStateInfo(2);
+                }
+                while (!state.IsName("Death"));
+
+                yield return new WaitForSeconds(state.length);
+
+
+            Destroy(gameObject);
+        }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using War.io.Enemy;
 
 namespace War.io.Shooting
 {
@@ -12,10 +13,21 @@ namespace War.io.Shooting
         private Collider[] _colliders = new Collider[2];
         private float _nextShotTimerSec;
         private GameObject _target;
+        private EnemyCharacter character;
 
-
+        protected void Awake()
+        {
+            character = GetComponent<EnemyCharacter>();
+        }
         protected void Update()
         {
+            if (character != null)
+            {
+                if (character._isDeath)
+                {
+                    return;
+                }
+            }
             _target = GetTarget();
 
             _nextShotTimerSec -= Time.deltaTime;

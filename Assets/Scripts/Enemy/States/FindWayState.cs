@@ -22,10 +22,14 @@ namespace War.io.Enemy.States
         {
             Vector3 targetPosition = _target.Closest.transform.position;
 
-            if (_navMesher.IsPathCalculated || _navMesher.DistanceToTargetPointFrom(targetPosition) > MaxDistanceBetweenRealAndCalculated)
+            if (!_navMesher.IsPathCalculated || _navMesher.DistanceToTargetPointFrom(targetPosition) > MaxDistanceBetweenRealAndCalculated)
             {
                 _navMesher.CalculatePath(targetPosition);
             }
+
+            // Только если путь рассчитан и есть точки, продолжаем
+            if (!_navMesher.IsPathCalculated)
+                return;
 
             var currentPoint = _navMesher.GetCurrentPoint();
             if (_currentPoint != currentPoint)
