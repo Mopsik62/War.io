@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using War.io.Movement;
 using War.io.PickUp;
@@ -23,6 +24,7 @@ namespace War.io
         [SerializeField]
         protected float _health = 2f;
 
+        public bool _isDeath = false;
 
         private IMovementDirectionSource _movementDirectionSource;
 
@@ -47,6 +49,7 @@ namespace War.io
 
         protected void Update()
         {
+            if (_isDeath) return;
             var direction = _movementDirectionSource.MovementDirection;
             var lookDirection = direction;
             if (_shootingController.HasTarget)
@@ -62,7 +65,7 @@ namespace War.io
 
 
             if (_health <= 0f)
-                Destroy(gameObject);
+                Death();
         }
 
         protected void OnTriggerEnter(Collider other)
@@ -87,6 +90,36 @@ namespace War.io
         public void SetWeapon(Weapon weapon)
         {
             _shootingController.SetWeapon(weapon, _hand);
+        }
+
+        public void Death()
+        {
+            StartCoroutine(DeathCoroutine());
+        }
+
+        private IEnumerator DeathCoroutine()
+        {
+
+                gameObject.layer = LayerMask.NameToLayer("Dead");
+
+                _isDeath = true;
+
+                _animator.SetTrigger("Death");
+
+                yield return null;
+
+                AnimatorStateInfo state;
+                do
+                {
+                    yield return null;
+                    state = _animator.GetCurrentAnimatorStateInfo(2);
+                }
+                while (!state.IsName("Death"));
+
+                yield return new WaitForSeconds(state.length);
+
+
+            Destroy(gameObject);
         }
 
     }
