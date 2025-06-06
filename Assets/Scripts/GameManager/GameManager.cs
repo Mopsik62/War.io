@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using War.io.Enemy;
+using War.io; 
 
 namespace War.io
 {
@@ -12,9 +13,12 @@ namespace War.io
     {
         public event Action Win;
         public event Action Loss;
+
+
         public PlayerCharacter Player { get; private set; } 
         public List<EnemyCharacter> Enemies { get; private set; }
 
+        public CurrentEnemiesCount EnemyCount { get; private set; }
         public TimerUI Timer { get; private set; }
 
         private void Start()
@@ -22,7 +26,10 @@ namespace War.io
             Player = FindObjectOfType<PlayerCharacter>();
             Enemies = FindObjectsOfType<EnemyCharacter>().ToList();
             Timer = FindObjectOfType<TimerUI>();
+            EnemyCount = FindObjectOfType<CurrentEnemiesCount>();
 
+            EnemyCount.SetEnemies(Enemies.Count);
+            Debug.Log(Enemies.Count);
             Player.Dead += OnPlayerDead;
 
             foreach (var enemy in Enemies)
@@ -44,6 +51,9 @@ namespace War.io
             var enemy = sender as EnemyCharacter;
             Enemies.Remove(enemy);
             enemy.Dead -= OnEnemyDead;
+            Debug.Log("Enemy dead");
+            EnemyCount.SetEnemies(Enemies.Count);
+
             if (Enemies.Count == 0)
             {
                 Win?.Invoke();
