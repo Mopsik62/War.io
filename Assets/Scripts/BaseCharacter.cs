@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using System;
 using War.io.Movement;
 using War.io.PickUp;
 using War.io.Shooting;
@@ -9,6 +10,7 @@ namespace War.io
     [RequireComponent(typeof(CharacterMovementController), typeof(ShootingController))]
     public abstract class BaseCharacter : MonoBehaviour
     {
+        public event Action<BaseCharacter> Dead;
         [SerializeField]
         private Weapon _baseWeaponPrefab;
 
@@ -118,7 +120,7 @@ namespace War.io
 
                 yield return new WaitForSeconds(state.length);
 
-
+            Dead?.Invoke(this);
             Destroy(gameObject);
         }
 
