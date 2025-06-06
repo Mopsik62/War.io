@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 using War.io.Movement;
 using War.io.PickUp;
@@ -22,6 +23,9 @@ namespace War.io
 
         [SerializeField]
         protected float _maxHealth = 2f;
+
+        [SerializeField]
+        protected Image _healthBar;
 
         [SerializeField]
         protected float _health = 2f;
@@ -77,6 +81,7 @@ namespace War.io
                 var bullet = other.gameObject.GetComponent<Bullet>();
 
                 _health -= bullet.Damage;
+                _healthBar.fillAmount = _health / _maxHealth;
 
                 Destroy(other.gameObject);
             }
