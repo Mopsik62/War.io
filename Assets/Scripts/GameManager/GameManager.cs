@@ -21,19 +21,25 @@ namespace War.io
         public CurrentEnemiesCount EnemyCount { get; private set; }
         public TimerUI Timer { get; private set; }
 
+        //public PointerManager pointerManager { get; private set; }
+
         private void Start()
         {
             Player = FindObjectOfType<PlayerCharacter>();
             Enemies = FindObjectsOfType<EnemyCharacter>().ToList();
             Timer = FindObjectOfType<TimerUI>();
             EnemyCount = FindObjectOfType<CurrentEnemiesCount>();
+           // pointerManager = FindObjectOfType<PointerManager>();
 
             EnemyCount.SetEnemies(Enemies.Count);
             Debug.Log(Enemies.Count);
             Player.Dead += OnPlayerDead;
 
             foreach (var enemy in Enemies)
+            {
                 enemy.Dead += OnEnemyDead;
+                //pointerManager.SetPointers(enemy);
+            }
 
             Timer.TimeEnd += PlayerLose;
         }
@@ -50,6 +56,7 @@ namespace War.io
         {
             var enemy = sender as EnemyCharacter;
             Enemies.Remove(enemy);
+            //pointerManager.RemoveEnemy(enemy);
             enemy.Dead -= OnEnemyDead;
             Debug.Log("Enemy dead");
             EnemyCount.SetEnemies(Enemies.Count);
