@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
+using System;
 using War.io.Movement;
 using War.io.PickUp;
 using War.io.Shooting;
@@ -9,6 +11,7 @@ namespace War.io
     [RequireComponent(typeof(CharacterMovementController), typeof(ShootingController))]
     public abstract class BaseCharacter : MonoBehaviour
     {
+        public event Action<BaseCharacter> Dead;
         [SerializeField]
         private Weapon _baseWeaponPrefab;
 
@@ -20,6 +23,9 @@ namespace War.io
 
         [SerializeField]
         protected float _maxHealth = 2f;
+
+        [SerializeField]
+        protected Image _healthBar;
 
         [SerializeField]
         protected float _health = 2f;
@@ -75,6 +81,7 @@ namespace War.io
                 var bullet = other.gameObject.GetComponent<Bullet>();
 
                 _health -= bullet.Damage;
+                _healthBar.fillAmount = _health / _maxHealth;
 
                 Destroy(other.gameObject);
             }
@@ -118,7 +125,7 @@ namespace War.io
 
                 yield return new WaitForSeconds(state.length);
 
-
+            Dead?.Invoke(this);
             Destroy(gameObject);
         }
 
