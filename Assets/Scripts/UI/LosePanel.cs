@@ -8,6 +8,11 @@ namespace War.io
     {
         [SerializeField]
         private GameManager _gameManager;
+
+
+        [SerializeField]
+        private AudioSource _loseAudio;
+
         private void Start()
         {
             _gameManager.Loss += ShowPanel;
@@ -17,6 +22,7 @@ namespace War.io
         private void ShowPanel()
         {
             gameObject.SetActive(true);
+            _loseAudio.Play();
         }
 
 

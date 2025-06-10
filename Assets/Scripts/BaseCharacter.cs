@@ -36,6 +36,9 @@ namespace War.io
         [SerializeField]
         private ParticleSystem _deathParticle;
 
+        [SerializeField]
+        private AudioSource _deathAudio;
+
 
         public bool _isDeath = false;
 
@@ -84,6 +87,7 @@ namespace War.io
             if (_health <= 0f)
             {
                 _deathParticle.Play();
+                _deathAudio.Play();
                 Death();
             }
         }

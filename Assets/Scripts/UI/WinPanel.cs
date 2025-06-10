@@ -8,6 +8,10 @@ namespace War.io
     {
         [SerializeField]
         private GameManager _gameManager;
+
+        [SerializeField]
+        private AudioSource _winAudio;
+
         private void Start()
         {
             _gameManager.Win += ShowPanel;
@@ -17,6 +21,7 @@ namespace War.io
         private void ShowPanel()
         {
             gameObject.SetActive(true);
+            _winAudio.Play();
         }
 
 
