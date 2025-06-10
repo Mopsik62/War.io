@@ -30,6 +30,13 @@ namespace War.io
         [SerializeField]
         protected float _health = 2f;
 
+        [SerializeField]
+        private ParticleSystem _damageParticle;
+
+        [SerializeField]
+        private ParticleSystem _deathParticle;
+
+
         public bool _isDeath = false;
 
         private IMovementDirectionSource _movementDirectionSource;
@@ -75,7 +82,10 @@ namespace War.io
 
 
             if (_health <= 0f)
+            {
+                _deathParticle.Play();
                 Death();
+            }
         }
 
         protected void OnTriggerEnter(Collider other)
@@ -84,6 +94,7 @@ namespace War.io
             {
                 var bullet = other.gameObject.GetComponent<Bullet>();
 
+                _damageParticle.Play();
                 _health -= bullet.Damage;
                 _healthBar.fillAmount = _health / _maxHealth;
 
@@ -112,7 +123,6 @@ namespace War.io
         {
 
                 gameObject.layer = LayerMask.NameToLayer("Dead");
-
                 _isDeath = true;
 
                 _animator.SetTrigger("Death");

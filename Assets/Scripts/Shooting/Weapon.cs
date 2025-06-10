@@ -29,10 +29,14 @@ namespace War.io.Shooting
         [SerializeField]
         private ParticleSystem _shootParticle;
 
+        [SerializeField]
+        private AudioSource _shootAudio;
+
         public void Shoot(Vector3 targetPoint)
         {
             var bullet = Instantiate(BulletPrefab, _bulletSpawnPosition.position, Quaternion.identity);
             _shootParticle.Play();
+            _shootAudio.Play();
 
             var target = targetPoint - _bulletSpawnPosition.position;
             target.y = -0.5f;
