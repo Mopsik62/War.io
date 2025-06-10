@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _acceleration: 2
-  _time: 10
+  _time: 3
 --- !u!95 &7121180041208448719
 Animator:
   serializedVersion: 5

@@ -16,6 +16,8 @@ namespace War.io.Movement
         [SerializeField]
         private float _runAwayBoost = 0.1f;
 
+        [SerializeField]
+        private ParticleSystem _speedParticle;
 
         [SerializeField]
         private float _haste = 2f;
@@ -91,8 +93,11 @@ namespace War.io.Movement
             float originalSpeed = _speed;
             _speed *= multiplier;
 
+            _speedParticle.Play();
+
             yield return new WaitForSeconds(duration);
 
+            _speedParticle.Stop();
             _speed = originalSpeed;
         }
 

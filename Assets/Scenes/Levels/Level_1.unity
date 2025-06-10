@@ -846,7 +846,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _outputText: {fileID: 1219914088}
-  <GameDurationSeconds>k__BackingField: 10
+  <GameDurationSeconds>k__BackingField: 25
 --- !u!1 &700954782
 GameObject:
   m_ObjectHideFlags: 0
@@ -5604,7 +5604,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5353758342145485203, guid: 2be3f1ab996832844a51177305ad6cfe, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8163845153790063458, guid: 2be3f1ab996832844a51177305ad6cfe, type: 3}
       propertyPath: _range
@@ -5620,7 +5620,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8673299146366120596, guid: 2be3f1ab996832844a51177305ad6cfe, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6
+      value: -11.26
       objectReference: {fileID: 0}
     - target: {fileID: 8673299146366120596, guid: 2be3f1ab996832844a51177305ad6cfe, type: 3}
       propertyPath: m_LocalRotation.w
