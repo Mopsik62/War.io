@@ -55,16 +55,20 @@ namespace War.io
 
         protected void Update()
         {
-            if (_isDeath) return;
             var direction = _movementDirectionSource.MovementDirection;
+            _characterMovementController.MovementDirection = direction;
+
+            if (_isDeath) return;
+
             var lookDirection = direction;
+
             if (_shootingController.HasTarget)
             {
                 lookDirection = (_shootingController.TargetPosition - transform.position).normalized;
 
             }
-            _characterMovementController.MovementDirection = direction;
             _characterMovementController.LookDirection = lookDirection;
+
 
             _animator.SetBool("IsMoving", direction != Vector3.zero);
             _animator.SetBool("IsShooting", _shootingController.HasTarget);

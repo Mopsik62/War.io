@@ -13,11 +13,15 @@ namespace War.io.Enemy.States
             var findWayState = new FindWayState(target, navMesher, enemyDirectionController);
             var moveForwardState = new MoveForwardState(target, enemyDirectionController);
             var runAwayState = new RunAwayState(target, enemyDirectionController, enemy);
+            var deathState = new DeathState(enemyDirectionController, enemy);
 
             SetInitialState(idleState);
 
             AddState(state: idleState, transitions: new List<Transition> //1:21
             {
+                new Transition(
+                    deathState,
+                    () => enemy._isDeath),
                 new Transition(
                     findWayState,
                     () => target.DistanceToClosestFromAgent() > NavMeshTurnOffDistance),
@@ -33,6 +37,9 @@ namespace War.io.Enemy.States
             AddState(state: findWayState, transitions: new List<Transition>
             {
                 new Transition(
+                    deathState,
+                    () => enemy._isDeath),
+                new Transition(
                     idleState,
                     () => target.Closest == null),
                 new Transition(
@@ -43,6 +50,9 @@ namespace War.io.Enemy.States
 
             AddState(state: moveForwardState, transitions: new List<Transition>
             {
+                new Transition(
+                    deathState,
+                    () => enemy._isDeath),
                 new Transition(
                     idleState,
                     () => target.Closest == null),
@@ -55,8 +65,17 @@ namespace War.io.Enemy.States
             }
             );
 
+            AddState(state: deathState, transitions: new List<Transition>
+            {
+
+            }
+            );
+
             AddState(state: runAwayState, transitions: new List<Transition>
             {
+                new Transition(
+                    deathState,
+                    () => enemy._isDeath),
                 new Transition(
                     idleState,
                     () => target.Closest == null),

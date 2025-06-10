@@ -61,6 +61,8 @@ namespace War.io.Movement
                  delta = MovementDirection * curSpeed * Time.deltaTime;
             }
 
+            Debug.Log(MovementDirection);
+
             _characterController.Move(delta);
         }
         
