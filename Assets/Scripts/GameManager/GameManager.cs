@@ -42,6 +42,9 @@ namespace War.io
             }
 
             Timer.TimeEnd += PlayerLose;
+
+            Time.timeScale = 1f;
+
         }
 
 

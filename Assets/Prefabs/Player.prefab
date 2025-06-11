@@ -1364,9 +1364,9 @@ MonoBehaviour:
   _baseWeaponPrefab: {fileID: -135733268454994750, guid: 98321474f509e04408b2452d3dbc7708, type: 3}
   _hand: {fileID: 5442648208178457571}
   _animator: {fileID: 509443602963417908}
-  _maxHealth: 100
+  _maxHealth: 10
   _healthBar: {fileID: 1238952905971659823}
-  _health: 100
+  _health: 10
   _damageParticle: {fileID: 4617237620095655694}
   _deathParticle: {fileID: 6007103113578088657}
   _deathAudio: {fileID: 5232738877801569850}
@@ -1395,7 +1395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7af0f693f83145e4eb67382a510c0064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 10
+  _speed: 5
   _maxRadiansDelta: 10
   _runAwayBoost: 5
   _speedParticle: {fileID: 923342189084728010}
